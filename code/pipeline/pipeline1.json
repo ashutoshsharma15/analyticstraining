@@ -116,14 +116,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "DelimitedTextSource",
+									"type": "JsonSource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
-										"recursive": true,
-										"wildcardFileName": "*"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
+										"recursive": true
 									}
 								},
 								"sink": {
@@ -141,62 +137,74 @@
 									"mappings": [
 										{
 											"source": {
-												"name": "RecordId",
-												"type": "Int32"
+												"path": "$['Region']"
 											},
-											"sink": {
-												"name": "RecordID",
-												"type": "Int32"
-											}
-										},
-										{
 											"sink": {
 												"name": "Region",
 												"type": "String"
 											}
 										},
 										{
+											"source": {
+												"path": "$['Plant']"
+											},
 											"sink": {
 												"name": "Plant",
 												"type": "String"
 											}
 										},
 										{
+											"source": {
+												"path": "$['DeviceId']"
+											},
 											"sink": {
 												"name": "DeviceId",
 												"type": "Int32"
 											}
 										},
 										{
+											"source": {
+												"path": "$['Temperature']"
+											},
 											"sink": {
 												"name": "Temperature",
 												"type": "Int32"
 											}
 										},
 										{
+											"source": {
+												"path": "$['TemperatureDescription']"
+											},
 											"sink": {
 												"name": "TemperatureDescription",
 												"type": "String"
 											}
 										},
 										{
+											"source": {
+												"path": "$['Humidity']"
+											},
 											"sink": {
 												"name": "Humidity",
 												"type": "Int32"
 											}
 										},
 										{
+											"source": {
+												"path": "$['RecordedTime']"
+											},
 											"sink": {
 												"name": "RecordedTime",
 												"type": "DateTime"
 											}
 										}
-									]
+									],
+									"collectionReference": ""
 								}
 							},
 							"inputs": [
 								{
-									"referenceName": "DelimitedText1",
+									"referenceName": "Json1",
 									"type": "DatasetReference"
 								}
 							],
