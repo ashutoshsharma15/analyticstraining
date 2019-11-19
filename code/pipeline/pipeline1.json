@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select 1"
+						"sqlReaderStoredProcedureName": "[dbo].[uspGetProcessableBlobs]"
 					},
 					"dataset": {
 						"referenceName": "AzureSqlTable1",
