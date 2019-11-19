@@ -200,7 +200,17 @@
 							"inputs": [
 								{
 									"referenceName": "Json1",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"path": {
+											"value": "@variables('path')",
+											"type": "Expression"
+										},
+										"name": {
+											"value": "@variables('name')",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
