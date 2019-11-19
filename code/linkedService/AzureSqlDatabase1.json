@@ -5,7 +5,15 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=testashuserver.database.windows.net;Initial Catalog=Testashutoshnew"
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=testashuserver.database.windows.net;Initial Catalog=Testashutoshnew;User ID=asshar",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sqlpassword"
+			}
 		}
 	}
 }
