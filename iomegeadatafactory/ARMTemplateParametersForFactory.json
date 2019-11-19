@@ -5,11 +5,11 @@
 		"factoryName": {
 			"value": "iomegeadatafactory"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://sqlpasswordash.vault.azure.net/"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_connectionString_secretName": {
-			"value": "sqlpassword"
 		}
 	}
 }

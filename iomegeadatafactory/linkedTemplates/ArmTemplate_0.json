@@ -7,13 +7,13 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "iomegeadatafactory"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://sqlpasswordash.vault.azure.net/"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "sqlpassword"
 		}
 	},
 	"variables": {
@@ -41,13 +41,14 @@
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]",
+					"password": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
 							"referenceName": "AzureKeyVault1",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "[parameters('AzureSqlDatabase1_properties_typeProperties_connectionString_secretName')]"
+						"secretName": "sqlpassword"
 					}
 				}
 			},
@@ -66,8 +67,74 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {}
+				"schema": [
+					{
+						"name": "RecordId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RecordDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "BlobId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BlobName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DisplayName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Path",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LastModified",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Size",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MediaType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IsFolder",
+						"type": "bit"
+					},
+					{
+						"name": "ETag",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FileLocator",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProcessStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DLSTargetLocation",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BlobMetadata"
+				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
@@ -94,7 +161,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select 1"
+								"sqlReaderStoredProcedureName": "[[dbo].[uspGetProcessableBlobs]"
 							},
 							"dataset": {
 								"referenceName": "AzureSqlTable1",
