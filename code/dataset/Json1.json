@@ -1,0 +1,58 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"path": {
+				"type": "string"
+			},
+			"name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().name",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().path",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Region": {
+					"type": "string"
+				},
+				"Plant": {
+					"type": "string"
+				},
+				"DeviceId": {
+					"type": "integer"
+				},
+				"Temperature": {
+					"type": "integer"
+				},
+				"TemperatureDescription": {
+					"type": "string"
+				},
+				"Humidity": {
+					"type": "integer"
+				},
+				"RecordedTime": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
